@@ -3,66 +3,41 @@
 import { useState } from "react";
 import ReadmeForm from "./components/ReadmeForm";
 import ReadmePreview from "./components/ReadmePreview";
-import DownloadButton from "./components/DownloadButton";
 
 export default function Home() {
-  const [data, setData] = useState(null);
-
-  const generateMarkdown = (formData) => setData(formData);
-
-  const markdownContent = data
-    ? `# ${data.title}
-
-## Description
-${data.description}
-
-## Installation
-${data.installation}
-
-## Usage
-${data.usage}
-
-## License
-${data.license}
-
-## Author
-${data.author}`
-    : "";
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    installation: "",
+    usage: "",
+    features: [],
+    status: "incomplete",
+    license: "MIT",
+    author: "",
+    sections: {
+      contributing: false,
+      roadmap: false,
+    },
+  });
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Page Header */}
-        <h1 className="text-4xl font-extrabold text-gray-900 mb-12 text-center">
-          README Generator
-        </h1>
+    <div className="min-h-screen bg-gray-100 text-black py-10 px-4">
+      <h1 className="text-4xl font-bold text-center mb-10">
+        README Generator
+      </h1>
 
-        {/* Main editor + preview */}
-        <div className="flex flex-col md:flex-row gap-8">
-          {/* Form / Editor */}
-          <div className="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Fill in your README</h2>
-            <ReadmeForm onGenerate={generateMarkdown} />
-          </div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
 
-          {/* Preview */}
-          <div className="flex-1 bg-gray-50 p-6 rounded-xl shadow-lg border border-gray-200 overflow-auto max-h-[80vh]">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-800">Preview</h2>
-            <div className="prose prose-slate max-w-full">
-              <ReadmePreview data={data} />
-            </div>
-            {data && (
-              <div className="mt-6">
-                <DownloadButton content={markdownContent} />
-              </div>
-            )}
-          </div>
+        {/* LEFT - FORM */}
+        <div className="bg-white p-6 rounded-xl shadow">
+          <ReadmeForm formData={formData} setFormData={setFormData} />
         </div>
 
-        {/* Footer */}
-        <p className="text-center text-gray-500 mt-10 text-sm">
-          Made with ❤️ using Next.js & Tailwind CSS
-        </p>
+        {/* RIGHT - PREVIEW */}
+        <div className="bg-black p-6 rounded-xl shadow overflow-auto max-h-[80vh]">
+          <ReadmePreview data={formData} />
+        </div>
+
       </div>
     </div>
   );
