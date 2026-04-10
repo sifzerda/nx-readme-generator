@@ -27,9 +27,6 @@ This project is ${data.status}.
 ## License
 Distributed under the ${data.license} License. See LICENSE.txt for more information.
 
-## Author
-${data.author || ""}
-
 ## Contributing
 Any contributions you make are greatly appreciated. 
 
@@ -41,6 +38,13 @@ If you have a suggestion that would make this better, please fork the repo and c
 5.	Open a Pull Request
 
 Contributors can also help provide writing tips or techniques, or anything not covered. Email me with writing tips and I will add these to the site, and attribute to you. You can also sign up for a user account and leave your feedback as comments.
+
+${
+  data.authors.length
+    ? `## Contributors
+${data.authors.map((f) => `- ${f}`).join("\n")}`
+    : ""
+}
 
 ${
   data.sections.roadmap

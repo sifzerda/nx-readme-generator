@@ -13,7 +13,7 @@ export default function Home() {
     features: [],
     status: "incomplete",
     license: "MIT",
-    author: "",
+    authors: [],
     sections: {
       contributing: false,
       roadmap: false,

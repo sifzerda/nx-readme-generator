@@ -145,18 +145,58 @@ export default function ReadmeForm({ formData, setFormData }) {
         <option value="GPL">GPL</option>
       </select>
 
-      {/* AUTHOR */}
+{/* AUTHOR */}
+<div>
+  <p className="font-semibold mb-2">Authors and Acknowledgement</p>
+
+  {formData.authors.map((author, index) => (
+    <div key={index} className="flex gap-2 mb-2">
       <input
-        name="author"
-        placeholder="Author"
-        value={formData.author}
-        onChange={handleChange}
+        value={author}
+        onChange={(e) => {
+          const updated = [...formData.authors];
+          updated[index] = e.target.value;
+
+          setFormData((prev) => ({
+            ...prev,
+            authors: updated,
+          }));
+        }}
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
+        placeholder={`Author ${index + 1}`}
       />
+
+      <button
+        type="button"
+        onClick={() => {
+          setFormData((prev) => ({
+            ...prev,
+            authors: prev.authors.filter((_, i) => i !== index),
+          }));
+        }}
+        className="px-3 py-1 bg-red-600 text-white rounded"
+      >
+        🗑️
+      </button>
+    </div>
+  ))}
+
+  {/* ADD FIRST / ADD MORE BUTTON */}
+  <button
+    type="button"
+    onClick={() =>
+      setFormData((prev) => ({
+        ...prev,
+        authors: [...prev.authors, ""],
+      }))
+    }
+    className="px-3 py-1 bg-blue-600 text-white rounded">
+    + Add Contributor
+  </button>
+</div>
 
       {/* OPTIONAL SECTIONS (checkboxes) */}
       <div className="space-y-2">
-
 
         <label className="block">
           <input
