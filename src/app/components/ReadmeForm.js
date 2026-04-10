@@ -156,15 +156,7 @@ export default function ReadmeForm({ formData, setFormData }) {
 
       {/* OPTIONAL SECTIONS (checkboxes) */}
       <div className="space-y-2">
-        <label className="block">
-          <input
-            type="checkbox"
-            checked={formData.sections.contributing}
-            onChange={() => toggleSection("contributing")}
-            className="mr-2"
-          />
-          Include Contributing Section
-        </label>
+
 
         <label className="block">
           <input
@@ -173,7 +165,7 @@ export default function ReadmeForm({ formData, setFormData }) {
             onChange={() => toggleSection("roadmap")}
             className="mr-2"
           />
-          Include Roadmap Section
+          Include Future Development
         </label>
       </div>
 
