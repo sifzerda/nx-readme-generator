@@ -60,22 +60,57 @@ export default function ReadmeForm({ formData, setFormData }) {
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       />
 
-      {/* FEATURES (simple comma input) */}
-      <input
-        name="features"
-        placeholder="Features (comma separated)"
-        value={formData.features.join(",")}
-        onChange={(e) =>
-          setFormData((prev) => ({
-            ...prev,
-            features: e.target.value
-              .split(",")
-              .map((f) => f.trim())
-              .filter(Boolean),
-          }))
-        }
-        className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
-      />
+      {/* FEATURES */}
+      <div>
+        <p className="font-semibold mb-2">Features</p>
+
+        {formData.features.map((feature, index) => (
+          <div key={index} className="flex gap-2 mb-2">
+            <input
+              value={feature}
+              onChange={(e) => {
+                const updated = [...formData.features];
+                updated[index] = e.target.value;
+
+                setFormData((prev) => ({
+                  ...prev,
+                  features: updated,
+                }));
+              }}
+              className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
+              placeholder={`Feature ${index + 1}`}
+            />
+
+            {/* ❌ ONLY show delete button for index > 0 */}
+            {index > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    features: prev.features.filter((_, i) => i !== index),
+                  }));
+                }}
+                className="px-3 py-1 bg-red-600 text-white rounded">
+                🗑️
+              </button>
+            )}
+          </div>
+        ))}
+
+        {/* ADD BUTTON */}
+        <button
+          type="button"
+          onClick={() =>
+            setFormData((prev) => ({
+              ...prev,
+              features: [...prev.features, ""],
+            }))
+          }
+          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded">
+          + Add Feature
+        </button>
+      </div>
 
       {/* STATUS (radio pills) */}
       <div>

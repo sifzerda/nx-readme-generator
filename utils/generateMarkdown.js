@@ -1,3 +1,4 @@
+// utils/generateMarkdown.js
 export function generateMarkdown(data) {
   return `# ${data.title || "Untitled Project"}
 
@@ -5,7 +6,10 @@ export function generateMarkdown(data) {
 ${data.description || ""}
 
 ## Installation
+
+\`\`\`bash
 ${data.installation || ""}
+\`\`\`
 
 ## Usage
 ${data.usage || ""}
