@@ -198,7 +198,9 @@ export default function ReadmeForm({ formData, setFormData }) {
       {/* OPTIONAL SECTIONS (checkboxes) */}
       <div className="space-y-2">
 
-        {/* support */}
+
+
+      {/* support */}
         <label className="block">
           <input
             type="checkbox"
@@ -219,7 +221,7 @@ export default function ReadmeForm({ formData, setFormData }) {
           />
         )}
 
-        {/* Future Development roadmap */}
+      {/* Future Development roadmap */}
         <label className="block">
           <input
             type="checkbox"
