@@ -10,6 +10,7 @@ export default function Home() {
     description: "",
     installation: "",
     usage: "",
+    techs: [],
     features: [],
     status: "incomplete",
     license: "MIT",

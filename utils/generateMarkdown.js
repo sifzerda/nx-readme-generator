@@ -15,6 +15,13 @@ ${data.installation || ""}
 ${data.usage || ""}
 
 ${
+  data.techs.length
+    ? `## Tech Used
+${data.techs.map((f) => `- ${f}`).join("\n")}`
+    : ""
+}
+
+${
   data.features.length
     ? `## Features
 ${data.features.map((f) => `- ${f}`).join("\n")}`

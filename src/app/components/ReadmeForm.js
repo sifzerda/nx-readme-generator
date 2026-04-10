@@ -60,6 +60,58 @@ export default function ReadmeForm({ formData, setFormData }) {
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       />
 
+       {/* TECH */}
+      <div>
+        <p className="font-semibold mb-2">Tech Used</p>
+
+        {formData.techs.map((tech, index) => (
+          <div key={index} className="flex gap-2 mb-2">
+            <input
+              value={tech}
+              onChange={(e) => {
+                const updated = [...formData.techs];
+                updated[index] = e.target.value;
+
+                setFormData((prev) => ({
+                  ...prev,
+                  techs: updated,
+                }));
+              }}
+              className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
+              placeholder={`E.g. npm package`}
+            />
+
+            {/* ❌ ONLY show delete button for index > 0 */}
+            {index > 0 && (
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    techs: prev.techs.filter((_, i) => i !== index),
+                  }));
+                }}
+                className="px-3 py-1 bg-red-600 text-white rounded">
+                🗑️
+              </button>
+            )}
+          </div>
+        ))}
+
+        {/* ADD BUTTON */}
+        <button
+          type="button"
+          onClick={() =>
+            setFormData((prev) => ({
+              ...prev,
+              techs: [...prev.techs, ""],
+            }))
+          }
+          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded">
+          + Add Tech
+        </button>
+      </div>
+
       {/* FEATURES */}
       <div>
         <p className="font-semibold mb-2">Features</p>

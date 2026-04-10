@@ -128,3 +128,24 @@ Distributed under the MIT License. See LICENSE.txt for more information.
 ## 11. Project status
 
 This project is [completed/incomplete/awaiting future development/discontinued].
+
+
+
+
+
+
+SECTIONS:
+
+- [Table of Contents] []
+- ~~[Description ]      [done]~~
+- [Badges ]           []
+- [Visuals ]          []
+- ~~[Installation ]    [done]~~
+- ~~[Usage ]           [done]~~
+- [Tech]              []
+- ~~[Support ]          [done]~~
+- ~~[Contributing ]     [done]~~
+- ~~[Authors and Acknowledgment ] [done]~~
+- ~~[License ] [done]~~
+- ~~[Project Status ] [done]~~
+- ~~[To Do ] [ ]~~    <-- can add this to readme post
