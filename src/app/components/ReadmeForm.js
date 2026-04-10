@@ -196,9 +196,7 @@ export default function ReadmeForm({ formData, setFormData }) {
       </div>
 
       {/* OPTIONAL SECTIONS (checkboxes) */}
-      <div className="space-y-2">
-
-
+      <div>
 
       {/* support */}
         <label className="block">
@@ -221,18 +219,79 @@ export default function ReadmeForm({ formData, setFormData }) {
           />
         )}
 
-      {/* Future Development roadmap */}
+
+      {/* Future Development development */}
         <label className="block">
           <input
             type="checkbox"
-            checked={formData.sections.roadmap}
-            onChange={() => toggleSection("roadmap")}
+            checked={formData.sections.development}
+            onChange={() => toggleSection("development")}
             className="mr-2"
           />
           Include Future Development
         </label>
+
+        {formData.sections.development && (
+          <input
+            name="Future Development"
+            placeholder="Add future development here"
+            value={formData.development}
+            onChange={handleChange}
+            className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400 mt-2"
+          />
+        )}
+
+      </div>
+
+      <div>
+        <p className="font-semibold mb-2">Future Development</p>
+
+        {formData.developments.map((development, index) => (
+          <div key={index} className="flex gap-2 mb-2">
+            <input
+              value={development}
+              onChange={(e) => {
+                const updated = [...formData.developments];
+                updated[index] = e.target.value;
+
+                setFormData((prev) => ({
+                  ...prev,
+                  developments: updated,
+                }));
+              }}
+              className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
+              placeholder={`Feature ${index + 1}`}
+            />
+
+              <button
+                type="button"
+                onClick={() => {
+                  setFormData((prev) => ({
+                    ...prev,
+                    developments: prev.developments.filter((_, i) => i !== index),
+                  }));
+                }}
+                className="px-3 py-1 bg-red-600 text-white rounded">
+                🗑️
+              </button>
+          </div>
+        ))}
+
+        {/* ADD BUTTON */}
+        <button
+          type="button"
+          onClick={() =>
+            setFormData((prev) => ({
+              ...prev,
+              developments: [...prev.developments, ""],
+            }))
+          }
+          className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded">
+          + Add Future Development
+        </button>
       </div>
 
     </form>
   );
 }
+

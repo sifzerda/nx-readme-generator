@@ -54,9 +54,9 @@ For support, users can contact me at ${data.supportContact || "[add contact meth
 }
 
 ${
-  data.sections.roadmap
-    ? `## Roadmap
-- Coming soon`
+  data.developments.length
+    ? `## Future Development
+${data.developments.map((f) => `- ${f}`).join("\n")}`
     : ""
 }
 `;

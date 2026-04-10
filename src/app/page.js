@@ -16,9 +16,10 @@ export default function Home() {
     authors: [],
     sections: {
       support: false,
-      roadmap: false,
+      development: false,
     },
-    supportContact: ""
+    supportContact: "",
+    developments: [],
   });
 
   return (
