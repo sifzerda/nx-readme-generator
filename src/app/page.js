@@ -15,9 +15,10 @@ export default function Home() {
     license: "MIT",
     authors: [],
     sections: {
-      contributing: false,
+      support: false,
       roadmap: false,
     },
+    supportContact: ""
   });
 
   return (

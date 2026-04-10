@@ -27,7 +27,7 @@ This project is ${data.status}.
 ## License
 Distributed under the ${data.license} License. See LICENSE.txt for more information.
 
-## Contributing
+## Authors and Acknowledgement
 Any contributions you make are greatly appreciated. 
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". 
@@ -43,6 +43,13 @@ ${
   data.authors.length
     ? `## Contributors
 ${data.authors.map((f) => `- ${f}`).join("\n")}`
+    : ""
+}
+
+${
+  data.sections.support
+    ? `## Support
+For support, users can contact me at ${data.supportContact || "[add contact method]"}.`
     : ""
 }
 
