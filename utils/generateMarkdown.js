@@ -1,9 +1,28 @@
 // utils/generateMarkdown.js
+
+import { BADGE_GROUPS} from "../utils/badges";
+
 export function generateMarkdown(data) {
+const allBadges = Object.values(BADGE_GROUPS).flat();
+
+const badgeString = allBadges
+  .filter((b) => data.badges?.includes(b.value))
+  .map((b) => b.badge)
+  .join(" ");
+  
   return `# ${data.title || "Untitled Project"}
+
+${
+  badgeString
+    ? `## Badges
+${badgeString}`
+    : ""
+}
 
 ## Description
 ${data.description || ""}
+
+## Visuals
 
 ## Installation
 
@@ -16,7 +35,7 @@ ${data.usage || ""}
 
 ${
   data.techs.length
-    ? `## Tech Used
+    ? `## Tech
 ${data.techs.map((f) => `- ${f}`).join("\n")}`
     : ""
 }

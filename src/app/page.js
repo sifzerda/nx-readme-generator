@@ -8,6 +8,8 @@ export default function Home() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    badges: [],  // this is the plural of the singular object 'badge'
+    visuals: [],
     installation: "",
     usage: "",
     techs: [],

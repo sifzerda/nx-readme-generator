@@ -142,7 +142,7 @@ SECTIONS:
 - [Visuals ]          []
 - ~~[Installation ]    [done]~~
 - ~~[Usage ]           [done]~~
-- [Tech]              []
+- ~~[Tech]              []~~
 - ~~[Support ]          [done]~~
 - ~~[Contributing ]     [done]~~
 - ~~[Authors and Acknowledgment ] [done]~~

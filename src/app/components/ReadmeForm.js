@@ -1,5 +1,7 @@
 "use client";
 
+import { BADGE_GROUPS } from"../../../utils/badges";
+
 export default function ReadmeForm({ formData, setFormData }) {
 
   const handleChange = (e) => {
@@ -42,10 +44,71 @@ export default function ReadmeForm({ formData, setFormData }) {
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       />
 
+     {/* BADGES */}
+<div>
+  <p className="font-semibold mb-2">Tech Badges</p>
+
+  {Object.entries(BADGE_GROUPS).map(([groupName, badges]) => (
+    <div key={groupName} className="mb-4">
+      
+      {/* Sub-heading */}
+      <p className="text-sm font-semibold text-gray-600 mb-2 capitalize">
+        {groupName}
+      </p>
+
+      <div className="flex flex-wrap gap-2">
+        {badges.map((option) => {
+          const isChecked = formData.badges.includes(option.value);
+
+          return (
+            <label
+              key={option.value}
+              className={`px-3 py-1 rounded border cursor-pointer text-sm ${
+                isChecked
+                  ? "bg-blue-600 text-white border-blue-600"
+                  : "bg-white text-gray-800"
+              }`}
+            >
+              <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => {
+                  setFormData((prev) => {
+                    const exists = prev.badges.includes(option.value);
+
+                    return {
+                      ...prev,
+                      badges: exists
+                        ? prev.badges.filter((b) => b !== option.value)
+                        : [...prev.badges, option.value],
+                    };
+                  });
+                }}
+                className="hidden"
+              />
+
+              {option.name}
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  ))}
+</div>
+
+      {/* VISUALS */}
+      <textarea
+        name="visuals"
+        placeholder="Visuals, e.g. screenshots, demo videos -- host on github issues then upload links here"
+        value={formData.visuals}
+        onChange={handleChange}
+        className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
+      />
+
       {/* INSTALLATION */}
       <textarea
         name="installation"
-        placeholder="Installation"
+        placeholder="Installation - make 2 boxes, one for commands (bash) and one for extra dot point instructions"
         value={formData.installation}
         onChange={handleChange}
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
@@ -60,7 +123,7 @@ export default function ReadmeForm({ formData, setFormData }) {
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       />
 
-       {/* TECH */}
+      {/* TECH */}
       <div>
         <p className="font-semibold mb-2">Tech Used</p>
 
@@ -250,7 +313,7 @@ export default function ReadmeForm({ formData, setFormData }) {
       {/* OPTIONAL SECTIONS (checkboxes) */}
       <div>
 
-      {/* support */}
+        {/* support */}
         <label className="block">
           <input
             type="checkbox"
@@ -272,7 +335,7 @@ export default function ReadmeForm({ formData, setFormData }) {
         )}
 
 
-      {/* Future Development development */}
+        {/* Future Development development */}
         <label className="block">
           <input
             type="checkbox"
@@ -315,17 +378,17 @@ export default function ReadmeForm({ formData, setFormData }) {
               placeholder={`Feature ${index + 1}`}
             />
 
-              <button
-                type="button"
-                onClick={() => {
-                  setFormData((prev) => ({
-                    ...prev,
-                    developments: prev.developments.filter((_, i) => i !== index),
-                  }));
-                }}
-                className="px-3 py-1 bg-red-600 text-white rounded">
-                🗑️
-              </button>
+            <button
+              type="button"
+              onClick={() => {
+                setFormData((prev) => ({
+                  ...prev,
+                  developments: prev.developments.filter((_, i) => i !== index),
+                }));
+              }}
+              className="px-3 py-1 bg-red-600 text-white rounded">
+              🗑️
+            </button>
           </div>
         ))}
 
