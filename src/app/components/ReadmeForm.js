@@ -1,8 +1,12 @@
 "use client";
 
-import { BADGE_GROUPS } from"../../../utils/badges";
+import { useState } from "react";
+import { BADGE_GROUPS, BADGE_GROUP_ORDER } from "../../../utils/badges/index";
+import { generateBadge } from "../../../utils/badges/generateBadge";
 
 export default function ReadmeForm({ formData, setFormData }) {
+  const [badgesOpen, setBadgesOpen] = useState(false);
+  const [openGroups, setOpenGroups] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,57 +48,101 @@ export default function ReadmeForm({ formData, setFormData }) {
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       />
 
-     {/* BADGES */}
-<div>
-  <p className="font-semibold mb-2">Tech Badges</p>
+      {/* BADGES */}
+      <div className="border rounded">
 
-  {Object.entries(BADGE_GROUPS).map(([groupName, badges]) => (
-    <div key={groupName} className="mb-4">
-      
-      {/* Sub-heading */}
-      <p className="text-sm font-semibold text-gray-600 mb-2 capitalize">
-        {groupName}
-      </p>
+        {/* MASTER TOGGLE */}
+        <button
+          type="button"
+          onClick={() => setBadgesOpen((prev) => !prev)}
+          className="w-full flex justify-between items-center px-3 py-2 bg-gray-200 hover:bg-gray-300"
+        >
+          <span className="font-semibold text-gray-800">Tech Badges</span>
+          <span>{badgesOpen ? "▲" : "▼"}</span>
+        </button>
 
-      <div className="flex flex-wrap gap-2">
-        {badges.map((option) => {
-          const isChecked = formData.badges.includes(option.value);
+        {/* MASTER CONTENT */}
+        {badgesOpen && (
+          <div className="p-2">
 
-          return (
-            <label
-              key={option.value}
-              className={`px-3 py-1 rounded border cursor-pointer text-sm ${
-                isChecked
-                  ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-800"
-              }`}
-            >
-              <input
-                type="checkbox"
-                checked={isChecked}
-                onChange={() => {
-                  setFormData((prev) => {
-                    const exists = prev.badges.includes(option.value);
+            {BADGE_GROUP_ORDER.map((groupKey) => {
+              const group = BADGE_GROUPS[groupKey];
+              if (!group) return null;
 
-                    return {
-                      ...prev,
-                      badges: exists
-                        ? prev.badges.filter((b) => b !== option.value)
-                        : [...prev.badges, option.value],
-                    };
-                  });
-                }}
-                className="hidden"
-              />
+              const isOpen = openGroups[groupKey];
 
-              {option.name}
-            </label>
-          );
-        })}
+              return (
+                <div key={groupKey} className="mb-2 border rounded">
+
+                  {/* GROUP HEADER */}
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOpenGroups((prev) => ({
+                        ...prev,
+                        [groupKey]: !prev[groupKey],
+                      }))
+                    }
+                    className="w-full flex justify-between items-center px-3 py-2 bg-gray-100 hover:bg-gray-200"
+                  >
+                    <span className="text-sm font-semibold text-gray-700">
+                      {group.label}
+                    </span>
+                    <span className="text-gray-500">
+                      {isOpen ? "▲" : "▼"}
+                    </span>
+                  </button>
+
+                  {/* GROUP CONTENT */}
+                  {isOpen && (
+                    <div className="p-3 flex flex-wrap gap-2 bg-white">
+                      {group.items.map((option) => {
+                        const isChecked = formData.badges.includes(option.value);
+
+                        return (
+                          <label
+                            key={option.value}
+                            className={`px-3 py-1 rounded border cursor-pointer text-sm transition ${isChecked
+                              ? "bg-blue-600 text-white border-blue-600"
+                              : "bg-white text-gray-800 hover:bg-gray-100"
+                              }`}
+                          >
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => {
+                                setFormData((prev) => {
+                                  const exists = prev.badges.includes(option.value);
+
+                                  return {
+                                    ...prev,
+                                    badges: exists
+                                      ? prev.badges.filter((b) => b !== option.value)
+                                      : [...prev.badges, option.value],
+                                  };
+                                });
+                              }}
+                              className="hidden"
+                            />
+
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: generateBadge(option),
+                              }}
+                            />
+                          </label>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                </div>
+              );
+            })}
+
+          </div>
+        )}
       </div>
-    </div>
-  ))}
-</div>
 
       {/* VISUALS */}
       <textarea

@@ -1,13 +1,16 @@
 // utils/generateMarkdown.js
 
 import { BADGE_GROUPS} from "../utils/badges";
+import { generateBadge } from "./badges/generateBadge";
 
 export function generateMarkdown(data) {
-const allBadges = Object.values(BADGE_GROUPS).flat();
+const allBadges = Object.values(BADGE_GROUPS).flatMap(
+  (group) => group.items
+);
 
 const badgeString = allBadges
   .filter((b) => data.badges?.includes(b.value))
-  .map((b) => b.badge)
+  .map((b) => generateBadge(b))
   .join(" ");
   
   return `# ${data.title || "Untitled Project"}
