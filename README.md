@@ -138,7 +138,8 @@ SECTIONS:
 
 - [Table of Contents] []
 - ~~[Description ]      [done]~~
-- [Badges ]           []
+- ~~[Badges ]           []~~
+   Need to add more badges
 - [Visuals ]          []
 - ~~[Installation ]    [done]~~
 - ~~[Usage ]           [done]~~
