@@ -15,6 +15,7 @@ import { developerForums } from "./data/devforums";
 import { devops } from "./data/devops";
 import { documentationPlatforms } from "./data/documentationplatforms";
 import { education } from "./data/education";
+import { engines } from "./data/engines";
 import { frameworks } from "./data/frameworks";
 import { funding } from "./data/funding";
 import { gaming } from "./data/gaming";
@@ -50,6 +51,7 @@ export const BADGE_GROUPS = {
   databases,
   ai,
   cloud,
+  engines,
   devops,
   tools,
   blockchain,
@@ -103,6 +105,7 @@ export const BADGE_GROUP_ORDER = [
   "developerForums",
   "documentationPlatforms",
   "education",
+  "engines",
   "funding",
   "frameworks",
   "gaming",
