@@ -63,7 +63,10 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 ## 9. Authors and acknowledgment
 
-The author acknowledges and credits those who have contributed to this project.
+The author acknowledges and credits those who have contributed to this project, including:
+
+- [GitHub markdown badges](https://github.com/Ileriayo/markdown-badges);
+- [More markdown badges](https://home.aveek.io/GitHub-Profile-Badges/);
 
 ## 10. License
 
