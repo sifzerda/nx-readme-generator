@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { BADGE_GROUPS, BADGE_GROUP_ORDER } from "../../../utils/badges/index";
-import { generateBadge } from "../../../utils/badges/generateBadge";
+//import { generateBadge } from "../../../utils/badges/generateBadge";
+import { LICENSE_BADGES } from "../../../utils/licenseBadges";
 import { getBadgeUrl } from "../../../utils/badges/generateBadge";
 //import BadgeOrderList from "../components/BadgeOrderList";
 
