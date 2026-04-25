@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ReadmeForm from "./components/ReadmeForm";
 import ReadmePreview from "./components/ReadmePreview";
+import BadgeOrderList from "./components/BadgeOrderList";
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -27,9 +28,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-100 text-black py-10 px-4">
-      <h1 className="text-4xl font-bold text-center mb-10">
-        README Generator
-      </h1>
+      <h1 className="text-4xl font-bold text-center mb-10">README Generator</h1>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
 

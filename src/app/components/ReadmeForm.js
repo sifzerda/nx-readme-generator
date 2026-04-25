@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { BADGE_GROUPS, BADGE_GROUP_ORDER } from "../../../utils/badges/index";
 import { generateBadge } from "../../../utils/badges/generateBadge";
+import { getBadgeUrl } from "../../../utils/badges/generateBadge";
+//import BadgeOrderList from "../components/BadgeOrderList";
 
 export default function ReadmeForm({ formData, setFormData }) {
   const [badgesOpen, setBadgesOpen] = useState(false);
@@ -95,14 +97,14 @@ export default function ReadmeForm({ formData, setFormData }) {
 
                   {/* GROUP CONTENT */}
                   {isOpen && (
-                    <div className="p-3 flex flex-wrap gap-2 bg-white">
+                    <div className="p-3 flex flex-col gap-1 bg-white">
                       {group.items.map((option) => {
-                        const isChecked = formData.badges.includes(option.value);
+                        const isChecked = formData.badges.includes(option.name);
 
                         return (
                           <label
-                            key={option.value}
-                            className={`px-3 py-1 rounded border cursor-pointer text-sm transition ${isChecked
+                            key={option.name}
+                            className={`flex items-center justify-between px-3 py-2 rounded border cursor-pointer transition ${isChecked
                               ? "bg-blue-600 text-white border-blue-600"
                               : "bg-white text-gray-800 hover:bg-gray-100"
                               }`}
@@ -112,23 +114,27 @@ export default function ReadmeForm({ formData, setFormData }) {
                               checked={isChecked}
                               onChange={() => {
                                 setFormData((prev) => {
-                                  const exists = prev.badges.includes(option.value);
+                                  const exists = prev.badges.includes(option.name);
 
                                   return {
                                     ...prev,
                                     badges: exists
-                                      ? prev.badges.filter((b) => b !== option.value)
-                                      : [...prev.badges, option.value],
+                                      ? prev.badges.filter((b) => b !== option.name)
+                                      : [...prev.badges, option.name],
                                   };
                                 });
                               }}
                               className="hidden"
                             />
 
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: generateBadge(option),
-                              }}
+                            {/* LEFT: NAME */}
+                            <span className="font-medium">{option.name}</span>
+
+                            {/* RIGHT: BADGE IMAGE */}
+                            <img
+                              src={getBadgeUrl(option)}
+                              alt={option.name}
+                              className="h-5"
                             />
                           </label>
                         );

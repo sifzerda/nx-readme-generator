@@ -9,7 +9,7 @@ const allBadges = Object.values(BADGE_GROUPS).flatMap(
 );
 
 const badgeString = allBadges
-  .filter((b) => data.badges?.includes(b.value))
+  .filter((b) => data.badges?.includes(b.name))
   .map((b) => generateBadge(b))
   .join(" ");
   
