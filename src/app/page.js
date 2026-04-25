@@ -3,7 +3,6 @@
 import { useState } from "react";
 import ReadmeForm from "./components/ReadmeForm";
 import ReadmePreview from "./components/ReadmePreview";
-import BadgeOrderList from "./components/BadgeOrderList";
 
 export default function Home() {
   const [formData, setFormData] = useState({
