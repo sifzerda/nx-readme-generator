@@ -310,9 +310,12 @@ export default function ReadmeForm({ formData, setFormData }) {
         onChange={handleChange}
         className="w-full border border-gray-300 p-2 rounded text-gray-900 bg-white placeholder-gray-400"
       >
+        <option value="">Select a license</option>
         <option value="MIT">MIT</option>
         <option value="Apache 2.0">Apache 2.0</option>
-        <option value="GPL">GPL</option>
+        <option value="GPL v3">GPL v3</option>
+        <option value="BSD 3-Clause">BSD 3-Clause</option>
+        <option value="Unlicense">Unlicense</option>
       </select>
 
       {/* AUTHOR */}

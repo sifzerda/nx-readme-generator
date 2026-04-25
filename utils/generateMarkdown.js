@@ -1,25 +1,27 @@
 // utils/generateMarkdown.js
 
-import { BADGE_GROUPS} from "../utils/badges";
+import { BADGE_GROUPS } from "../utils/badges";
 import { generateBadge } from "./badges/generateBadge";
+import { LICENSE_BADGES } from "../utils/licenseBadges";
 
 export function generateMarkdown(data) {
-const allBadges = Object.values(BADGE_GROUPS).flatMap(
-  (group) => group.items
-);
+  const licenseBadge =
+    LICENSE_BADGES[data.license]?.badge || "";
+  const allBadges = Object.values(BADGE_GROUPS).flatMap(
+    (group) => group.items
+  );
 
-const badgeString = allBadges
-  .filter((b) => data.badges?.includes(b.name))
-  .map((b) => generateBadge(b))
-  .join(" ");
-  
+  const badgeString = allBadges
+    .filter((b) => data.badges?.includes(b.name))
+    .map((b) => generateBadge(b))
+    .join(" ");
+
   return `# ${data.title || "Untitled Project"}
 
-${
-  badgeString
-    ? `## Badges
-${badgeString}`
-    : ""
+${badgeString || licenseBadge
+  ? `## Badges
+${badgeString ? badgeString + " " : ""}${licenseBadge ? licenseBadge : ""}`
+  : ""
 }
 
 ## Description
@@ -36,19 +38,17 @@ ${data.installation || ""}
 ## Usage
 ${data.usage || ""}
 
-${
-  data.techs.length
-    ? `## Tech
+${data.techs.length
+      ? `## Tech
 ${data.techs.map((f) => `- ${f}`).join("\n")}`
-    : ""
-}
+      : ""
+    }
 
-${
-  data.features.length
-    ? `## Features
+${data.features.length
+      ? `## Features
 ${data.features.map((f) => `- ${f}`).join("\n")}`
-    : ""
-}
+      : ""
+    }
 
 ## Status
 This project is ${data.status}.
@@ -68,25 +68,22 @@ If you have a suggestion that would make this better, please fork the repo and c
 
 Contributors can also help provide writing tips or techniques, or anything not covered. Email me with writing tips and I will add these to the site, and attribute to you. You can also sign up for a user account and leave your feedback as comments.
 
-${
-  data.authors.length
-    ? `## Contributors
+${data.authors.length
+      ? `## Contributors
 ${data.authors.map((f) => `- ${f}`).join("\n")}`
-    : ""
-}
+      : ""
+    }
 
-${
-  data.sections.support
-    ? `## Support
+${data.sections.support
+      ? `## Support
 For support, users can contact me at ${data.supportContact || "[add contact method]"}.`
-    : ""
-}
+      : ""
+    }
 
-${
-  data.developments.length
-    ? `## Future Development
+${data.developments.length
+      ? `## Future Development
 ${data.developments.map((f) => `- ${f}`).join("\n")}`
-    : ""
-}
+      : ""
+    }
 `;
 }
